@@ -1,0 +1,17 @@
+# Folders to ignore, whatever the place they are
+.metadata
+classes
+hybris/bin/**/bin
+gensrc
+# Folders to ignore at the root of the repository
+log/
+temp/
+data/
+licenses/
+# filter only custom extension
+bin/*
+!bin/custom/
+# Filename patterns to ignore
+*.class
+items.xsd
+beans.xsd
