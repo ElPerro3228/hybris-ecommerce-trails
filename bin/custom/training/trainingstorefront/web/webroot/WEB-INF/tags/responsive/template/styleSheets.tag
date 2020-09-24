@@ -26,4 +26,7 @@
 	<link rel="stylesheet" type="text/css" media="all" href="${fn:escapeXml(addOnThemeCss)}"/>
 </c:forEach>
 
+<%-- google webfonts --%>
+<link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+
 <cms:previewCSS cmsPageRequestContextData="${cmsPageRequestContextData}" />
