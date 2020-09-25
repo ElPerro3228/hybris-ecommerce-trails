@@ -14,9 +14,14 @@ import de.hybris.platform.core.initialization.SystemSetupParameter;
 import de.hybris.platform.core.initialization.SystemSetupParameterMethod;
 import com.training.initialdata.constants.TrainingInitialDataConstants;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.hybris.platform.servicelayer.impex.ImportConfig;
+import de.hybris.platform.servicelayer.impex.ImportResult;
+import de.hybris.platform.servicelayer.impex.ImportService;
+import de.hybris.platform.servicelayer.impex.impl.StreamBasedImpExResource;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Required;
 
@@ -94,9 +99,7 @@ public class InitialDataSystemSetup extends AbstractSystemSetup
 	@SystemSetup(type = Type.PROJECT, process = Process.ALL)
 	public void createProjectData(final SystemSetupContext context)
 	{
-		/*
-		 * Add import data for each site you have configured
-		 */
+		importImpexFile(context, "traininginitialdata/import/sampledata/question/questions.impex");
 	}
 
 	public CoreDataImportService getCoreDataImportService()

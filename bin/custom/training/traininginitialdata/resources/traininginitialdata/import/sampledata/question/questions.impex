@@ -1,0 +1,6 @@
+$productCatalog = electronicsProductCatalog
+$catalogVersion = catalogversion(catalog(id[default=$productCatalog]), version[default='Staged'])[unique=true, default=$productCatalog:Staged]
+
+INSERT_UPDATE Question; code[unique = true]; product(code, $catalogVersion); question                         ; questionCustomer(uid)[default = 'anonymous']; answer     ; answerCustomer(uid)[default = 'anonymous'];
+                      ; 0000001            ; 492274                        ; Could you deliver it to Belarus? ;                                             ; Yeah, sure ;                                           ;
+                      ; 0000002            ; 492274                        ; Does it work fine?               ; zohan@customer.com                          ; Of, course ; keenreviewer14@hybris.com                 ;
