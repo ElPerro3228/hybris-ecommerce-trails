@@ -18,6 +18,23 @@
 	</relations>
 
 	<itemtypes>
+
+		<itemtype code="QuestionCMSComponent" extends="SimpleCMSComponent" generate="true" autocreate="true"
+				  jaloclass="com.training.core.jalo.QuestionCMSComponent">
+			<description>Used to display offers on homepage</description>
+			<attributes>
+				<attribute qualifier="numberOfQuestionsToShow" type="java.lang.Integer">
+					<defaultvalue>3</defaultvalue>
+					<modifiers optional="false" read="true" search="true" write="true"/>
+					<persistence type="property"/>
+				</attribute>
+				<attribute qualifier="fontSize" type="java.lang.Integer">
+					<modifiers optional="true" read="true" search="true" write="true"/>
+					<persistence type="property" />
+				</attribute>
+			</attributes>
+		</itemtype>
+
 		<itemtype code="Question" autocreate="true" generate="true">
 			<deployment table="Questions" typecode="32265" />
 			<attributes>

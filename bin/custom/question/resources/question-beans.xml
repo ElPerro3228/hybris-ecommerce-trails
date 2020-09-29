@@ -17,4 +17,8 @@
 	</bean>
 	-->
 
+	<enum class="de.hybris.platform.commercefacades.product.ProductOption">
+		<value>QUESTION</value>
+	</enum>
+
 </beans>

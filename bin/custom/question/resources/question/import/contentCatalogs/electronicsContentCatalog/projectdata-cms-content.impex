@@ -1,0 +1,18 @@
+# -----------------------------------------------------------------------
+# Copyright (c) 2019 SAP SE or an SAP affiliate company. All rights reserved.
+# -----------------------------------------------------------------------
+$contentCatalog = electronicsContentCatalog
+$contentCV = catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]), CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+
+INSERT_UPDATE ContentSlotName; name[unique = true]; template(uid, $contentCV)[unique = true][default = 'ProductDetailsPageTemplate']; validComponentTypes(code); compTypeGroup(code)
+                             ; QuestionSlot       ;                                                                                 ; QuestionCMSComponent
+
+# CMS Media Paragraph Component
+INSERT_UPDATE QuestionCMSComponent; $contentCV[unique = true]; uid[unique = true]   ; name                  ; numberOfQuestionsToShow; fontSize; &componentRef
+                                  ;                          ; QuestionCMSComponent ; Question CMSComponent ; 5                      ; 12      ; QuestionCMSComponent
+
+INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; active; cmsComponents(&componentRef)
+                         ;                          ; QuestionSlot      ; true  ; QuestionCMSComponent
+
+INSERT_UPDATE ContentSlotForTemplate; $contentCV[unique = true]; uid[unique = true]          ; position[unique = true]; pageTemplate(uid, $contentCV)[unique = true][default = 'ProductDetailsPageTemplate']; contentSlot(uid, $contentCV)[unique = true]; allowOverwrite
+                                    ;                          ; QuestionSlot-ProductDetails ; Questions              ;                                                                                     ; QuestionSlot                               ; true

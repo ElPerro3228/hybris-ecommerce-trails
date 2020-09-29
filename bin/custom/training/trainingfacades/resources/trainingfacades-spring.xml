@@ -182,4 +182,19 @@
 	</bean>
 
 	<bean id="genderData" class="com.training.facades.product.data.GenderData" scope="prototype"/>
+
+	<alias name="defaultQuestionDataConverter" alias="questionDataConverter" />
+	<bean id="defaultQuestionDataConverter" class="com.training.facades.populators.QuestionDataConverter"/>
+
+	<alias name="defaultQuestionProductDataPopulator" alias="questionProductDataPopulator" />
+	<bean id="defaultQuestionProductDataPopulator" class="com.training.facades.populators.QuestionProductDataPopulator">
+		<property name="questionDataConverter" ref="questionDataConverter" />
+	</bean>
+
+	<bean parent="configurablePopulatorModification">
+		<property name="target" ref="defaultProductConfiguredPopulator" />
+		<property name="keyType" value="de.hybris.platform.commercefacades.product.ProductOption" />
+		<property name="key" value="QUESTION" />
+		<property name="add" ref="questionProductDataPopulator" />
+	</bean>
 </beans>

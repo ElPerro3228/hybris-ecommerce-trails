@@ -30,8 +30,6 @@
     <itemtypes>
 
         <!-- Add your item definitions here -->
-
-
         <!-- TypeGroups are for structure of this file only -->
 
         <typegroup name="Apparel">
@@ -103,6 +101,7 @@
                 </attributes>
             </itemtype>
         </typegroup>
+
 
     </itemtypes>
 </items>
