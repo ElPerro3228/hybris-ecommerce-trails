@@ -1,15 +1,32 @@
 # -----------------------------------------------------------------------
 # Copyright (c) 2019 SAP SE or an SAP affiliate company. All rights reserved.
 # -----------------------------------------------------------------------
-$productCatalog=electronicsProductCatalog
-$catalogVersions=catalogVersions(catalog(id),version);
-$serverConfigName=electronicsSolrServerConfig
-$indexConfigName=electronicsSolrIndexConfig
-$searchConfigName=electronicsPageSize
-$facetSearchConfigName=electronicsIndex
-$facetSearchConfigDescription=Electronics Solr Index
-$searchIndexNamePrefix=electronics
-$solrIndexedType=electronicsProductType
-$indexBaseSite=electronics
-$indexLanguages=ja,en,de,zh
-$indexCurrencies=JPY,USD
+$prefix = electronics
+$productCatalog = electronicsProductCatalog
+$catalogVersions = catalogVersions(catalog(id), version);
+$serverConfigName = electronicsSolrServerConfig
+$indexConfigName = electronicsSolrIndexConfig
+$searchConfigName = electronicsPageSize
+$facetSearchConfigName = electronicsIndex
+$facetSearchConfigDescription = Electronics Solr Index
+$searchIndexNamePrefix = electronics
+$solrIndexedType = electronicsProductType
+$indexBaseSite = electronics
+$indexLanguages = ja, en, de, zh
+$indexCurrencies = JPY, USD
+$questionsCountRange = $prefixQuestionsCountRange
+
+# Define price range set
+INSERT_UPDATE SolrValueRangeSet; name[unique = true]  ; qualifier; type; solrValueRanges(&rangeValueRefID)
+                               ; $questionsCountRange ; QCR      ; int ; rangeRefQCR1, rangeRefQCR2, rangeRefQCR3
+
+# Define price ranges
+INSERT_UPDATE SolrValueRange; &rangeValueRefID; solrValueRangeSet(name)[unique = true]; name[unique = true]; from; to
+                            ; rangeRefQCR1    ; $questionsCountRange                  ; 0-5                ; 0   ; 5
+                            ; rangeRefQCR2    ; $questionsCountRange                  ; 6-10               ; 6   ; 10
+                            ; rangeRefQCR3    ; $questionsCountRange                  ; 11-100             ; 11  ; 100
+
+# Non-facet properties
+INSERT_UPDATE SolrIndexedProperty; solrIndexedType(identifier)[unique = true]; name[unique = true]; type(code); sortableType(code); currency[default = false]; localized[default = false]; multiValue[default = false]; useForSpellchecking[default = false]; useForAutocomplete[default = false]; fieldValueProvider; valueProviderParameter
+                                 ; $solrIndexedType                          ; questionsCount     ; int       ;                   ;                          ;                           ;                            ;                                     ;                                    ;                   ;
+

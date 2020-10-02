@@ -35,6 +35,14 @@
 			</attributes>
 		</itemtype>
 
+		<itemtype generate="false" code="Product" autocreate="false">
+			<attributes>
+				<attribute qualifier="questionsCount" type="java.lang.Integer">
+					<persistence type="dynamic" attributeHandler="questionsCountAttributeHandler"/>
+				</attribute>
+			</attributes>
+		</itemtype>
+
 		<itemtype code="Question" autocreate="true" generate="true">
 			<deployment table="Questions" typecode="32265" />
 			<attributes>

@@ -197,4 +197,17 @@
 		<property name="key" value="QUESTION" />
 		<property name="add" ref="questionProductDataPopulator" />
 	</bean>
+
+	<bean id="productQuestionsCountPopulator" class="com.training.facades.populators.ProductQuestionsCountPopulator"/>
+	<bean id="searchResultProductQuestionsCountPopulator" class="com.training.facades.populators.SearchResultProductQuestionsCountPopulator"/>
+
+	<bean parent="modifyPopulatorList">
+		<property name="list" ref="productConverter"/>
+		<property name="add"  ref="productQuestionsCountPopulator"/>
+	</bean>
+
+	<bean parent="modifyPopulatorList">
+		<property name="list" ref="commerceSearchResultProductConverter"/>
+		<property name="add"  ref="searchResultProductQuestionsCountPopulator"/>
+	</bean>
 </beans>

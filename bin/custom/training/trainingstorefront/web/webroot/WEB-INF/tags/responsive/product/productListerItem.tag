@@ -57,6 +57,10 @@
 			</div>
 		</div>
 
+		<div class="questions-count">
+			<c:out value="${product.questionsCount}" />
+		</div>
+
 	</ycommerce:testId>
 </li>
 

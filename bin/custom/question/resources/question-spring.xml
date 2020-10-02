@@ -16,6 +16,8 @@
     <context:annotation-config/>
 	<context:component-scan base-package="com.training.question.controllers" />
 
+	<bean id="questionsCountAttributeHandler" class="com.training.attributehandlers.QuestionsCountAttributeHandler" />
+
 	<bean id="questionCoreDataImportedEventListener" parent="abstractCoreDataImportedEventListener">
 		<property name="supportedChannels">
 			<list value-type="de.hybris.platform.commerceservices.enums.SiteChannel">
