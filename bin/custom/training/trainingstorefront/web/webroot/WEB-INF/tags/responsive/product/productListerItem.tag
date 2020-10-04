@@ -58,7 +58,9 @@
 		</div>
 
 		<div class="questions-count">
-			<c:out value="${product.questionsCount}" />
+			<button type="button" class="btn btn-default" aria-label="Left Align">
+				<span class="glyphicon glyphicon-bullhorn" aria-hidden="true"></span> Questions: <c:out value="${product.questionsCount}" />
+			</button>
 		</div>
 
 	</ycommerce:testId>
