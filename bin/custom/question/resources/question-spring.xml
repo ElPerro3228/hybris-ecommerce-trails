@@ -39,4 +39,10 @@
 		<property name="extensionName" value="question" />
 	</bean>
 
+	<bean id="questionsCountValueProvider"
+		  class="com.training.providers.QuestionsCountValueProvider"
+		  parent="abstractPropertyFieldValueProvider">
+		<property name="fieldNameProvider" ref="solrFieldNameProvider"/>
+	</bean>
+
 </beans>

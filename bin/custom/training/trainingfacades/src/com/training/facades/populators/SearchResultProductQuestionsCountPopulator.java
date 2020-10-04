@@ -11,7 +11,7 @@ public class SearchResultProductQuestionsCountPopulator implements Populator<Sea
     public void populate(SearchResultValueData searchResultValueData, ProductData productData) throws ConversionException {
         Assert.notNull(searchResultValueData, "Parameter source cannot be null.");
         Assert.notNull(productData, "Parameter target cannot be null.");
-        final Integer questionsCount = (Integer) searchResultValueData.getValues().get("questionsCount");
+        final Integer questionsCount = (Integer) searchResultValueData.getValues().get("questionsCountValue");
         productData.setQuestionsCount(questionsCount);
     }
 }
