@@ -18,7 +18,7 @@ $questionsCountRange = $prefixQuestionsCountRange
 
 # Define price range set
 INSERT_UPDATE SolrValueRangeSet; name[unique = true]  ; qualifier; type; solrValueRanges(&rangeValueRefID)
-                               ; $questionsCountRange ; QCR      ; int ; rangeRefQCR1, rangeRefQCR2, rangeRefQCR3
+                               ; $questionsCountRange ; default  ; int ; rangeRefQCR1, rangeRefQCR2, rangeRefQCR3
 
 # Define price ranges
 INSERT_UPDATE SolrValueRange; &rangeValueRefID; solrValueRangeSet(name)[unique = true]; name[unique = true]; from; to
@@ -31,5 +31,22 @@ INSERT_UPDATE SolrIndexedProperty; solrIndexedType(identifier)[unique = true]; n
                                  ; $solrIndexedType                          ; questionsCountValue ; int       ;                   ;                          ;                           ;                            ;                                     ;                                    ; questionsCountValueProvider ;                       ;
 
 # facet properties
-INSERT_UPDATE SolrIndexedProperty; solrIndexedType(identifier)[unique = true]; name[unique = true]; type(code); sortableType(code); currency[default = false]; localized[default = false]; multiValue[default = false]; facet[default = true]; facetType(code); facetSort(code); priority; visible; useForSpellchecking[default = false]; useForAutocomplete[default = false]; fieldValueProvider          ; valueProviderParameter; facetDisplayNameProvider; customFacetSortProvider; topValuesProvider; rangeSets(name)
-                                 ; $solrIndexedType                          ; questionsCount     ; int       ;                   ;                          ;                           ;                            ; true                 ; MultiSelectOr  ; Alpha          ; 2000    ; true   ;                                     ;                                    ; questionsCountValueProvider ;                       ;                         ;                        ;                  ; $questionsCountRange
+INSERT_UPDATE SolrIndexedProperty; solrIndexedType(identifier)[unique = true]; name[unique = true]; type(code); sortableType(code); currency[default = false]; localized[default = false]; multiValue[default = false]; facet[default = true]; facetType(code); facetSort(code); priority; visible; useForSpellchecking[default = false]; useForAutocomplete[default = false]; fieldValueProvider; valueProviderParameter; facetDisplayNameProvider; customFacetSortProvider; topValuesProvider; rangeSets(name)
+                                 ; $solrIndexedType                          ; questionsCount     ; int       ;                   ;                          ;                           ;                            ; true                 ; MultiSelectOr  ; Alpha          ; 2000    ; true   ;                                     ;                                    ;                   ;                       ;                         ;                        ;                  ; $questionsCountRange
+
+# Define the available sorts
+INSERT_UPDATE SolrSort; &sortRefID; indexedType(identifier)[unique = true]; code[unique = true] ; useBoost
+                      ; sortRef1  ; $solrIndexedType                      ; questionsCount-asc  ; false
+                      ; sortRef2  ; $solrIndexedType                      ; questionsCount-desc ; false
+
+# Define the sort fields
+INSERT_UPDATE SolrSortField; sort(indexedType(identifier), code)[unique = true]; fieldName[unique = true]; ascending[unique = true]
+                           ; $solrIndexedType:questionsCount-asc               ; priceValue              ; true
+                           ; $solrIndexedType:questionsCount-desc              ; priceValue              ; false
+
+INSERT_UPDATE SolrIndexedType ; identifier[unique=true] ; type(code) ; variant ; sorts(&sortRefID)
+                              ; $solrIndexedType        ; Product    ; false   ; sortRef1, sortRef2
+
+# Other search query facets
+INSERT_UPDATE SolrSearchQueryProperty; indexedProperty(name, solrIndexedType(identifier))[unique = true]; facet[default = true]; facetType(code); priority; facetDisplayNameProvider; facetSortProvider; facetTopValuesProvider   ; includeInResponse[default = true]; searchQueryTemplate(name, indexedType(identifier))[unique = true][default = DEFAULT:$solrIndexedType]
+                                     ; questionsCount:$solrIndexedType                                  ;                      ; MultiSelectOr  ; 4000    ;                         ;                  ; defaultTopValuesProvider ;                                  ;
