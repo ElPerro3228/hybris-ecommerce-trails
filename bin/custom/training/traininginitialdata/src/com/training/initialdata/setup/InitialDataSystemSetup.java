@@ -14,14 +14,9 @@ import de.hybris.platform.core.initialization.SystemSetupParameter;
 import de.hybris.platform.core.initialization.SystemSetupParameterMethod;
 import com.training.initialdata.constants.TrainingInitialDataConstants;
 
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import de.hybris.platform.servicelayer.impex.ImportConfig;
-import de.hybris.platform.servicelayer.impex.ImportResult;
-import de.hybris.platform.servicelayer.impex.ImportService;
-import de.hybris.platform.servicelayer.impex.impl.StreamBasedImpExResource;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Required;
 
@@ -38,6 +33,7 @@ public class InitialDataSystemSetup extends AbstractSystemSetup
 	private static final String IMPORT_CORE_DATA = "importCoreData";
 	private static final String IMPORT_SAMPLE_DATA = "importSampleData";
 	private static final String ACTIVATE_SOLR_CRON_JOBS = "activateSolrCronJobs";
+	private static final String TRAINING = "electronics";
 
 	private CoreDataImportService coreDataImportService;
 	private SampleDataImportService sampleDataImportService;
@@ -100,6 +96,8 @@ public class InitialDataSystemSetup extends AbstractSystemSetup
 	public void createProjectData(final SystemSetupContext context)
 	{
 		importImpexFile(context, "traininginitialdata/import/sampledata/question/questions.impex");
+		importImpexFile(context, "traininginitialdata/import/coredata/stores/electronics/store.impex");
+		importImpexFile(context, "traininginitialdata/import/sampledata/stores/electronics/points-of-service.impex");
 	}
 
 	public CoreDataImportService getCoreDataImportService()

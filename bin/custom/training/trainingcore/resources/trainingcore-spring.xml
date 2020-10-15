@@ -538,4 +538,9 @@
 		<property name="itemCleanupHooks" ref="csTicketRetentionHooks"/>
 		<property name="ticketBusinessService" ref="ticketBusinessService"/>
 	</bean>
+
+	<bean id="hybrisPointOfServiceFacetDisplayNameProvider"
+		  class="com.training.core.search.solrfacetsearch.provider.impl.PointOfServiceFacetDisplayNameProvider">
+		<property name="pointOfServiceService" ref="pointOfServiceService" />
+	</bean>
 </beans>
