@@ -95,9 +95,8 @@ public class InitialDataSystemSetup extends AbstractSystemSetup
 	@SystemSetup(type = Type.PROJECT, process = Process.ALL)
 	public void createProjectData(final SystemSetupContext context)
 	{
-		importImpexFile(context, "traininginitialdata/import/sampledata/question/questions.impex");
-		importImpexFile(context, "traininginitialdata/import/coredata/stores/electronics/store.impex");
-		importImpexFile(context, "traininginitialdata/import/sampledata/stores/electronics/points-of-service.impex");
+		importImpexFile(context, "/traininginitialdata/import/sampledata/question/questions.impex", Boolean.FALSE, Boolean.FALSE);
+		importImpexFile(context, "/traininginitialdata/import/sampledata/stores/electronics/points-of-service.impex", Boolean.FALSE, Boolean.FALSE);
 	}
 
 	public CoreDataImportService getCoreDataImportService()
