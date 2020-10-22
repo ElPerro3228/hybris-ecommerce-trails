@@ -1,0 +1,8 @@
+$regulargroup=regulargroup
+$customergroup=customergroup
+$hybridsgroup=hybrids
+
+# Create Customer Group
+INSERT_UPDATE Usergroup;uid[unique=true];groups(uid)[mode=append]
+                       ;$regulargroup;$customergroup
+                       ;$hybridsgroup;$customergroup

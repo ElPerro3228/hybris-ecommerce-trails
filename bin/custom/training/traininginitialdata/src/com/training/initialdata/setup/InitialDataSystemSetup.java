@@ -97,6 +97,8 @@ public class InitialDataSystemSetup extends AbstractSystemSetup
 	{
 		importImpexFile(context, "/traininginitialdata/import/sampledata/question/questions.impex", Boolean.FALSE, Boolean.FALSE);
 		importImpexFile(context, "/traininginitialdata/import/sampledata/stores/electronics/points-of-service.impex", Boolean.FALSE, Boolean.FALSE);
+		importImpexFile(context, "/traininginitialdata/import/coredata/stores/electronics/user-groups.impex", Boolean.FALSE, Boolean.FALSE);
+		importImpexFile(context, "/traininginitialdata/import/coredata/stores/electronics/pricegroups.impex", Boolean.FALSE, Boolean.FALSE);
 	}
 
 	public CoreDataImportService getCoreDataImportService()

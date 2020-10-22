@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+ Copyright (c) 2019 SAP SE or an SAP affiliate company. All rights reserved.
+--><extensioninfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="extensioninfo.xsd">
+           
+    
+    <extension abstractclassprefix="Generated" classprefix="Trainingcommerceservice" jaloLogicFree="true" managername="TrainingcommerceserviceManager" managersuperclass="de.hybris.platform.jalo.extension.Extension" name="trainingcommerceservice" usemaven="false">
+
+
+
+        <requires-extension name="trainingcore"/>
+        <requires-extension name="commerceservices"/>
+
+      
+        
+        <coremodule generated="true" manager="com.training.commreceservice.jalo.TrainingcommerceserviceManager" packageroot="com.training.commreceservice"/>
+                      
+
+        
+           
+    
+    </extension>
+              
+
+
+</extensioninfo>
