@@ -12,8 +12,9 @@
 		
         
         <requires-extension name="addonsupport"/>
-                		
-        
+        <requires-extension name="trainingfacades"/>
+        <requires-extension name="acceleratorservices"/>
+
         <coremodule generated="true" manager="com.training.question.jalo.QuestionManager" packageroot="com.training.question"/>
                 		
         

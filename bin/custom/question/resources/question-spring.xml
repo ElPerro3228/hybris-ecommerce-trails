@@ -15,6 +15,7 @@
            
     <context:annotation-config/>
 	<context:component-scan base-package="com.training.question.controllers" />
+	<import resource="trainingfacades-spring.xml" />
 
 	<bean id="questionsCountAttributeHandler" class="com.training.attributehandlers.QuestionsCountAttributeHandler" />
 
@@ -43,6 +44,41 @@
 		  class="com.training.providers.QuestionsCountValueProvider"
 		  parent="abstractPropertyFieldValueProvider">
 		<property name="fieldNameProvider" ref="solrFieldNameProvider"/>
+	</bean>
+
+	<bean id="questionsEmailProcessDefinitionResource"
+		  class="de.hybris.platform.processengine.definition.ProcessDefinitionResource" >
+		<property name="resource" value="classpath:/question/processes/questionsEmailProcess.xml"/>
+	</bean>
+
+
+	<bean id="generateQuestionsEmail" parent="abstractGenerateEmailAction">
+		<property name="frontendTemplateName" value="QuestionsEmailTemplate"/>
+	</bean>
+
+	<bean id="questionsEmailContext"
+		  class="com.training.question.context.QuestionsEmailContext"
+		  parent="customerEmailContext"
+		  scope="prototype" >
+		<property name="questionDataConverter" ref="questionDataConverter" />
+	</bean>
+
+	<bean id="questionDao" class="com.training.question.dao.impl.DefaultQuestionDao" />
+
+	<alias name="defaultQuestionService" alias="questionService" />
+	<bean id="defaultQuestionService" class="com.training.question.service.impl.DefaultQuestionService">
+		<property name="questionDao" ref="questionDao" />
+	</bean>
+
+	<bean id="sendQuestionsEmailJob" class="com.training.core.question.jobs.SendQuestionsEmailJob"
+		  parent="abstractJobPerformable">
+		<property name="baseSiteService" ref="baseSiteService" />
+		<property name="businessProcessService" ref="businessProcessService" />
+		<property name="commerceCommonI18NService" ref="commerceCommonI18NService" />
+		<property name="questionService" ref="questionService" />
+		<property name="timeService" ref="defaultTimeService" />
+		<property name="baseStoreService" ref="baseStoreService" />
+		<property name="customerService" ref="customerService" />
 	</bean>
 
 </beans>

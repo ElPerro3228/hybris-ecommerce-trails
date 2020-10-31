@@ -22,7 +22,7 @@ import org.springframework.beans.factory.annotation.Required;
 public class CustomerEmailContext extends AbstractEmailContext<StoreFrontCustomerProcessModel>
 {
 	private Converter<UserModel, CustomerData> customerConverter;
-	private CustomerData customerData;
+	protected CustomerData customerData;
 
 	@Override
 	public void init(final StoreFrontCustomerProcessModel storeFrontCustomerProcessModel, final EmailPageModel emailPageModel)

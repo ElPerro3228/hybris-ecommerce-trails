@@ -1,0 +1,25 @@
+<html>
+    <head>
+    </head>
+
+    <body bgcolor="#ffffff">
+
+        <h1>Hello, there are new questions: </h1>
+        <ul>
+            #if($ctx.questionsMap.isEmpty())
+                <p>There are no new questions</p>
+            #end
+            #foreach( $key in $ctx.questionsMap.keySet() )
+                <li>
+                    Questions For Product Code: $key <br/>
+                    <ul>
+                        #foreach($question in $ctx.questionsMap.get($key))
+                            <li>$question.questionCustomer asked $question.question</li>
+                        #end
+                    </ul>
+                </li>
+            #end
+        </ul>
+        <p>This is an automatically created email</p>
+    </body>
+</html>

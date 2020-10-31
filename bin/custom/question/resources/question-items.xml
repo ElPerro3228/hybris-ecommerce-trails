@@ -6,6 +6,18 @@
 <items 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 			xsi:noNamespaceSchemaLocation="items.xsd">
 
+	<collectiontypes>
+		<collectiontype code="QuestionsList" elementtype="Question" autocreate="true" generate="true" type="list"/>
+	</collectiontypes>
+
+	<maptypes>
+		<maptype code="QuestionsMap"
+				 argumenttype="java.lang.String"
+				 returntype="QuestionsList"
+				 autocreate="true"
+				 generate="false"/>
+	</maptypes>
+
 	<relations>
 		<relation code="Question2Product" localized="false">
 			<sourceElement qualifier="questions" type="Question" collectiontype="set" cardinality="many" ordered="false">
@@ -68,5 +80,35 @@
 				</attribute>
 			</attributes>
 		</itemtype>
+
+		<itemtype code="QuestionsEmailProcess" extends="StoreFrontCustomerProcess"
+				  jaloclass="com.training.core.jalo.process.QuestionsEmailProcess">
+			<attributes>
+				<attribute qualifier="questionsMap" type="QuestionsMap">
+					<persistence type="property" />
+					<modifiers optional="true" write="true" read="true" search="true" />
+				</attribute>
+				<attribute qualifier="emailReceiver" type="java.lang.String">
+					<persistence type="property" />
+					<modifiers optional="true" write="true" read="true" search="true" />
+				</attribute>
+			</attributes>
+		</itemtype>
+
+		<itemtype code="SendNewQuestionsCronJob" extends="CronJob"
+				  jaloclass="com.training.core.question.cronjob.jalo.SendNewQuestionsCronJob"
+				  autocreate="true" generate="true">
+			<attributes>
+				<attribute qualifier="emailTo" type="java.lang.String">
+					<persistence type="property" />
+					<modifiers optional="true" write="true" read="true" search="true" />
+				</attribute>
+				<attribute qualifier="lastPerformance" type="java.util.Date">
+					<persistence type="property" />
+					<modifiers optional="true" write="true" read="true" search="true" />
+				</attribute>
+			</attributes>
+		</itemtype>
+
 	</itemtypes>
 </items>

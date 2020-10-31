@@ -1,0 +1,21 @@
+# Content Catalog Version
+$contentCatalog = electronicsContentCatalog
+$contentCV = catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]), CatalogVersion.version[default=Online])[default=$contentCatalog:Online]
+
+# Path to the Velocity Templates
+$emailResource = jar:com.training.core.setup.CoreSystemSetup&/trainingcore/import/emails
+
+# Package of the Context class
+$emailPackageName = com.training.question.context
+
+# Create Template Renderers
+INSERT_UPDATE RendererTemplate; code[unique = true]              ; contextClass                            ; templateScript[lang = en, translator = de.hybris.platform.commerceservices.impex.impl.FileLoaderValueTranslator]; rendererType(code)[default = 'velocity']
+                              ; email-questionsComponentTemplate ; $emailPackageName.QuestionsEmailContext ; $emailResource/email-questionsComponentTemplate.vm
+                              ; email-questionsComponentSubject  ; $emailPackageName.QuestionsEmailContext ; $emailResource/email-questionsComponentSubject.vm
+
+# Create Email page Template
+INSERT_UPDATE EmailPageTemplate; $contentCV[unique = true]; uid[unique = true]     ; active; frontendTemplateName; subject(code)                   ; htmlTemplate(code)               ; restrictedPageTypes(code)
+                               ;                          ; QuestionsEmailTemplate ; true  ; questionsEmail      ; email-questionsComponentSubject ; email-questionsComponentTemplate ; EmailPage
+
+INSERT_UPDATE EmailPage; $contentCV[unique = true]; uid[unique = true]; name                ; masterTemplate(uid, $contentCV); defaultPage; approvalStatus(code)[default = 'approved']; fromEmail[lang = en]            ; fromName[lang = en]
+                       ;                          ; QuestionsEmail    ; New Questions Email ; QuestionsEmailTemplate         ; false      ;                                           ; stanislau.lohvin@expert-soft.by ; From Website

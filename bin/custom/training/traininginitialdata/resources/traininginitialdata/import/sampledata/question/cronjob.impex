@@ -1,0 +1,8 @@
+INSERT_UPDATE ServicelayerJob; code[unique = true]   ; springId
+                             ; sendQuestionsEmailJob ; sendQuestionsEmailJob
+
+INSERT_UPDATE SendNewQuestionsCronJob; code[unique = true]     ; job(code)             ; emailTo                  ; lastPerformance[dateformat = dd-MM-yyyy]; sessionLanguage(isocode);
+                     ; sendNewQuestionsCronJob ; sendQuestionsEmailJob ; stas.logvin.99@gmail.com ; 29-04-2000                              ; en                      ;
+
+INSERT_UPDATE Trigger; cronjob(code)[unique = true]; cronExpression
+                     ; sendNewQuestionsCronJob     ; 0 12 * * * ?
